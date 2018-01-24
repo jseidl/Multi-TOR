@@ -13,6 +13,5 @@ fi
 for i in $(seq $TOR_INSTANCES)
 do
 	control_port=$((base_control_port+i))
-
     ./tor_newid.exp $control_port
 done

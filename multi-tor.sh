@@ -8,9 +8,11 @@ set -e
 base_socks_port=9050
 base_control_port=15000
 
+current_dir=$(echo $PWD)
+
 # Create data directory if it doesn't exist
-if [ ! -d "data" ]; then
-	mkdir "data"
+if [ ! -d "$current_dir/data" ]; then
+	mkdir "$current_dir/data"
 fi
 
 TOR_INSTANCES="$1"
@@ -28,11 +30,12 @@ do
 	control_port=$((base_control_port+i))
 	if [ ! -d "data/tor$i" ]; then
 		echo "Creating directory data/tor$i"
-		mkdir "data/tor$i"
+		mkdir "$current_dir/data/tor$i"
 	fi
 
 	# Take into account that authentication for the control port is disabled. Must be used in secure and controlled environments
-	echo "Running: tor --RunAsDaemon 1 --CookieAuthentication 0 --HashedControlPassword \"\" --ControlPort $control_port --PidFile tor$i.pid --SocksPort $socks_port --DataDirectory data/tor$i"
 
-	tor --RunAsDaemon 1 --CookieAuthentication 0 --HashedControlPassword "" --ControlPort $control_port --PidFile tor$i.pid --SocksPort $socks_port --DataDirectory data/tor$i
+	echo "Running: tor --RunAsDaemon 1 --CookieAuthentication 0 --HashedControlPassword "" --ControlPort $control_port --PidFile $current_dir/data/tor$i/tor$i.pid --SocksPort $socks_port --DataDirectory $current_dir/data/tor$i"
+
+	tor --RunAsDaemon 1 --CookieAuthentication 0 --HashedControlPassword "" --ControlPort $control_port --PidFile $current_dir/data/tor$i/tor$i.pid --SocksPort $socks_port --DataDirectory $current_dir/data/tor$i
 done
