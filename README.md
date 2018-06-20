@@ -1,3 +1,5 @@
+> **NOTE:** This project is no longer being maintained. Thankfully, @trimstray revamped into a much more badass version and you can check it out at [his GitHub repository](https://github.com/trimstray/multitor).
+
 Multi-TOR
 =========
 
