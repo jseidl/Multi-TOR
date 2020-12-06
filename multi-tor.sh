@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 #making script to stop on 1st error
-set -e
+#also stop undefined variable; ie 
+set -eu
 
 # Original script from
 # http://blog.databigbang.com/distributed-scraping-with-multiple-tor-circuits/
